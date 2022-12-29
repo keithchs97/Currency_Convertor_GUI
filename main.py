@@ -4,9 +4,9 @@ import time
 import os
 
 if not os.path.exists("symbols.txt"):
-    with open("symbols.txt", "w") as file:
+    with open("symbols.txt", "w", encoding="utf-8") as file:
         for k, v in apis.symbols_result['symbols'].items():
-            file.writelines(k + '\n')
+            file.writelines(f"{k} ({v})"'\n')
         pass
 
 sg.theme("DarkGrey6")
@@ -46,11 +46,10 @@ while True:
     match event:
 
         case 'Convert':
-            base_currency = values['combo1'].upper()
-            target_currency = values['combo2'].upper()
+            base_currency = values['combo1'][:3].upper()
+            target_currency = values['combo2'][:3].upper()
             base_amount = int(values['amount'])
             result = apis.currency_convertor(base_currency, target_currency, base_amount)
-            print(result)
             window['results'].update(result)
             window['amount'].update(value='')
 

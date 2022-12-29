@@ -14,7 +14,7 @@ def read_file(filepath=FILEPATH):
 api_key = {"apikey": "zG00dCavzdlLN6J7ItRDRa5CYaG4v5NO"}
 url = "https://api.apilayer.com/exchangerates_data/symbols"
 response = requests.request("GET", url, headers=api_key)
-
+symbols_result = response.json()
 
 def currency_convertor(base, target, amount):
     url_convertor = f"https://api.apilayer.com/exchangerates_data/latest?symbols={target}&base={base}"
